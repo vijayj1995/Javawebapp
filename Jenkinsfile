@@ -1,31 +1,16 @@
-@Library(['devops-dsl@cloudbees-check']) _
-Pipeline
-{
-    applicationName             = 'new-application'
-    mvnGoals                    = 'clean install'
-    reportDir                   = 'target/jacoco-ut/'
-    reportFiles                 = 'index.html'
-    reportName                  = 'TestCase HTML Reports'
-    buildNode                   = 'sonar-scanner'
-    sonarProjectName            = 'Demo'
-    sonarProjectKey             = 'Demo'
-    sonarProjectVersion         = '1.0'
-    sonarProjectLanguage        = 'java'
-    sonarSources                = 'src/main/java'
-    nexus_AppName               = 'APP15401'
-    executeSonar                = 'YES'
-    emailRecipientsList         = 'vinay.kumarm@bt.com'
-    deploymentRepo_name         = 'dev-deployment'
-    ansiblePlaybookfileName     = 'devDeployment.yml'
-    ansibleInventory_FileName   = 'devInventory.yml'
-    deploymentRepo_Path         = 'APP15401/dev-deployment.git'
-    application_Name            = 'SimpleWebApplication'
-    reportDir                   = 'target/jacoco-ut/'
-    reportFiles                 = 'index.html'
-    reportName                  = 'JavaWebapp TestCase HTML Reports'
-    QAdeploymentRepo_name       = 'qa-deployment'
-    QAansiblePlaybookfileName   = 'qaDeployment.yml'
-	QAansibleInventory_FileName = 'qaInventory.yml'
-	QAdeploymentRepo_Path       = 'APP15401/qa-deployment.git'
-	qaApproversList             = 'vinay.kumarm@bt.com,vishnu.priyagudivada@bt.com'
+pipeline {
+agent any
+	stages {
+		stage("checkoutscm"){
+			steps {
+			git credentialsId: '4f89ed93-46cc-4084-a790-f36bd32b36c7', url: 'https://github.com/CHETBSC/Javawebapp.git'
+			}
+			stage("maven build"){
+				steps{
+				//cd Javawebapp
+					sh 'mvn clean install'
+				}
+			}
+		}
+	}
 }
