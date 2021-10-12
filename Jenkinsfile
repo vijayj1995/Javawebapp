@@ -106,12 +106,12 @@ pipeline {
 
         }
 
-       /* stage('Upload to Nexus') {
+       stage('Upload to Nexus') {
             steps {
                 // Deploy to Nexus
-               nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'EED_Engg-Excellence-Devops-POC_maven_releases', packages: []
+               nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'http://65.0.179.45:8081/repository/maven-central/', packages: []
             }
-        }*/
+        }
     }
         /*post('Send Email') {
         failure {
