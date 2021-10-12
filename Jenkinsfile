@@ -6,7 +6,7 @@ pipeline {
 
     // global env variables
 
-   /* environment {
+    /*environment {
 
         EMAIL_RECIPIENTS = 'akshay.kg@bt.com'
 
@@ -29,28 +29,28 @@ pipeline {
 
             }
         }
-        stage('Code Coverage (Sonarqube)')
+        stage('Code Coverage')
         {
-                steps
+          steps
           {
          
            jacoco()
            }
-            
         }
         
-        stage('Code Quality Check (Sonarqube)')
+       stage('Code Quality Check (Sonarqube)')
         {
             environment {
-                projectkey = 'Javawebapp'
-                projectName = 'Javawebapp'
-                projectVersion = '1.1'
-                sonarSource = 'src'
-                sonarLanguage = 'java'
-                sonarBinaries = 'target/classes'
-                sonarCoverageformat = '-Dsonar.coverage.jacoco.xmlReportPaths'
-                coverageReportsPath = 'target/jacoco.xml'
-                sonarSourceEncoding = 'UTF-8'
+            projectKey = 'Javawebapp'
+            projectName = 'Javawebapp'
+            projectVersion = '1.1'
+            sonarSources = 'src'
+            sonarLanguage = 'java'
+            sonarBinaries = 'target/classes'
+            sonarCoverageformat = '-Dsonar.coverage.jacoco.xmlReportPaths'
+            coverageReportsPath = 'target/jacoco.xml'
+            sonarSourceEncoding = 'UTF-8'
+            }
           steps
           {
              script
@@ -60,7 +60,7 @@ pipeline {
                
                     // some block
                     sh """
-                        ${sonarscanner}/bin/sonar-scanner -Dsonar.projectKey=${projectKey} \
+                    ${sonarscanner}/bin/sonar-scanner -Dsonar.projectKey=${projectKey} \
                         -Dsonar.projectName=${projectName} \
                         -Dsonar.projectVersion=${projectVersion} \
                         -Dsonar.sources=${sonarSources} \
@@ -106,14 +106,14 @@ pipeline {
 
         }*/
 
-        /* stage('Upload to Nexus') {
+       /* stage('Upload to Nexus') {
             steps {
                 // Deploy to Nexus
                nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'EED_Engg-Excellence-Devops-POC_maven_releases', packages: []
             }
         }*/
     }
-       /* post('Send Email') {
+        /*post('Send Email') {
         failure {
             script {
                 mail (to: 'wasim.3.akram@bt.com',
