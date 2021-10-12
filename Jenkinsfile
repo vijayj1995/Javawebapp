@@ -2,22 +2,22 @@ pipeline {
 
     // run on jenkins nodes tha has slave label .....
 
-    agent { label 'slaves' }
+    agent { label 'maven' }
 
     // global env variables
 
-    environment {
+   /* environment {
 
         EMAIL_RECIPIENTS = 'akshay.kg@bt.com'
 
-    }
+    }*/
     
     stages {
         
         stage('Build') {
             steps {
                 // Run the maven build
-                sh 'mvn clean deploy'
+                sh 'mvn clean install'
                 
             }
         }
@@ -29,13 +29,13 @@ pipeline {
 
             }
         }
-        stage('Code Coverage')
+        stage('Code Coverage (Sonarqube)')
         {
-          steps
-          {
-         
-           jacoco()
-           }
+            environment {
+                projectkey = 'Javawebapp'
+                projectName = Javawebapp'
+                projectVersion = '1.1'
+                sonarSource = 'src'
         }
         
         stage('Code Quality Check (Sonarqube)')
@@ -45,11 +45,21 @@ pipeline {
              script
              {
                def sonarscanner = tool 'sonar_scanner'
-               withSonarQubeEnv(credentialsId: '0a89166b-802d-44f9-9d0b-259358ef079b') {
+               withSonarQubeEnv('sonarqube') {
                
                     // some block
                     sh """
-                    ${sonarscanner}/bin/sonar-scanner
+                        ${sonarscanner}/bin/sonar-scanner -Dsonar.projectKey=${projectKey} \
+                        -Dsonar.projectName=${projectName} \
+                        -Dsonar.projectVersion=${projectVersion} \
+                        -Dsonar.sources=${sonarSources} \
+                        -Dsonar.language=${sonarLanguage} \
+                        -Dsonar.java.binaries=${sonarBinaries} \
+                        ${sonarCoverageformat}=${coverageReportsPath}\
+                        -Dsonar.c.file.suffixes=- \
+                        -Dsonar.cpp.file.suffixes=- \
+                        -Dsonar.objc.file.suffixes=- \
+                        -Dsonar.sourceEncoding=${sonarSourceEncoding}
                 
                     """
                 }
