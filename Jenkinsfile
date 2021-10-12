@@ -31,6 +31,16 @@ pipeline {
         }
         stage('Code Coverage (Sonarqube)')
         {
+                steps
+          {
+         
+           jacoco()
+           }
+            
+        }
+        
+        stage('Code Quality Check (Sonarqube)')
+        {
             environment {
                 projectkey = 'Javawebapp'
                 projectName = 'Javawebapp'
@@ -41,10 +51,6 @@ pipeline {
                 sonarCoverageformat = '-Dsonar.coverage.jacoco.xmlReportPaths'
                 coverageReportsPath = 'target/jacoco.xml'
                 sonarSourceEncoding = 'UTF-8'
-        }
-        
-        stage('Code Quality Check (Sonarqube)')
-        {
           steps
           {
              script
