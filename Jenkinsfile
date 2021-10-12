@@ -109,7 +109,7 @@ pipeline {
        stage('Upload to Nexus') {
             steps {
                 // Deploy to Nexus
-               nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'http://65.0.179.45:8081/repository/maven-central/', packages: []
+               nexusPublisher nexusInstanceId: 'nexus-dev', nexusRepositoryId: 'http://65.0.179.45:8081/repository/maven-central/', packages: []
             }
         }
     }
