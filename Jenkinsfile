@@ -33,9 +33,14 @@ pipeline {
         {
             environment {
                 projectkey = 'Javawebapp'
-                projectName = Javawebapp'
+                projectName = 'Javawebapp'
                 projectVersion = '1.1'
                 sonarSource = 'src'
+                sonarLanguage = 'java'
+                sonarBinaries = 'target/classes'
+                sonarCoverageformat = '-Dsonar.coverage.jacoco.xmlReportPaths'
+                coverageReportsPath = 'target/jacoco.xml'
+                sonarSourceEncoding = 'UTF-8'
         }
         
         stage('Code Quality Check (Sonarqube)')
