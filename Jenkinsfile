@@ -13,7 +13,7 @@ pipeline {
     }*/
     
     stages {
-        stage ( 'checkout scm') {
+        stage ('checkout scm') {
         updateGitlabCommitStatus name: STAGE_NAME, state: 'running'
                 pipelineStage = "${STAGE_NAME}"
                 step([$class: 'WsCleanup'])
