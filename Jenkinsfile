@@ -27,7 +27,9 @@ pipeline {
                 updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
             }
         }
-        pom = readMavenPom file: 'pom.xml'
+        stage('Build') {
+            steps {
+                pom = readMavenPom file: 'pom.xml'
             appVersion = pom.version
 
             if ("${branchName}" == 'Dev' || "${branchName}" == 'Test' || "${branchName}" == 'dev') {
@@ -39,9 +41,6 @@ pipeline {
             appPomGroupID = pom.groupId
             appGroupID = appPomGroupID.toString().replace('.', '/')
             appName = pom.artifactId
-
-        stage('Build') {
-            steps {
                 // Run the maven build
                 sh 'mvn clean install'
                 
