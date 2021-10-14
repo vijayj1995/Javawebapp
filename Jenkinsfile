@@ -13,11 +13,35 @@ pipeline {
     }*/
     
     stages {
-        
+        stage ( 'checkout scm') {
+        updateGitlabCommitStatus name: STAGE_NAME, state: 'running'
+                pipelineStage = "${STAGE_NAME}"
+                step([$class: 'WsCleanup'])
+                checkout scm
+                branchName = "${BRANCH_NAME}"
+                commitID = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                commiterName = sh(returnStdout: true, script: 'git show --format="<%aE>" HEAD | head -1').trim().toString().replace('<', '').replace('>', '').trim()
+                totalCommitsOfUser = sh(returnStdout: true, script: "git shortlog -s -n -e --all --no-merges | grep -i ${commiterName} | sed -e 's/ //g' | cut -f 1 | head -1").trim()
+                totalCommitsInBranch = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
+                updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
+        }
+        pom = readMavenPom file: 'pom.xml'
+            appVersion = pom.version
+
+            if ("${branchName}" == 'Dev' || "${branchName}" == 'Test' || "${branchName}" == 'dev') {
+                appVersion = "${appVersion}" =~ '-SNAPSHOT' ? pom.version : "${appVersion}" + '-SNAPSHOT'
+            } else {
+                appVersion = "${appVersion}" =~ '.RELEASE' ? pom.version : "${appVersion}" + '.RELEASE'
+            }
+
+            appPomGroupID = pom.groupId
+            appGroupID = appPomGroupID.toString().replace('.', '/')
+            appName = pom.artifactId
+
         stage('Build') {
             steps {
                 // Run the maven build
-                sh 'mvn clean deploy'
+                sh 'mvn clean install'
                 
             }
         }
