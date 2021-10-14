@@ -14,6 +14,7 @@ pipeline {
     
     stages {
         stage ('checkout scm') {
+            steps {
         updateGitlabCommitStatus name: STAGE_NAME, state: 'running'
                 pipelineStage = "${STAGE_NAME}"
                 step([$class: 'WsCleanup'])
@@ -24,6 +25,7 @@ pipeline {
                 totalCommitsOfUser = sh(returnStdout: true, script: "git shortlog -s -n -e --all --no-merges | grep -i ${commiterName} | sed -e 's/ //g' | cut -f 1 | head -1").trim()
                 totalCommitsInBranch = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
                 updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
+            }
         }
         pom = readMavenPom file: 'pom.xml'
             appVersion = pom.version
