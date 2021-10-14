@@ -12,7 +12,7 @@ pipeline {
                 appVersion = "pom.version"
                 appPomGroupID =  "pom.groupId"
                 appGroupID = "appPomGroupID.toString().replace('.', '/')"
-                appName = 'readMavenPom().getArtifactId()'
+                appName = "readMavenPom().getArtifactId()"
 
     }
     
