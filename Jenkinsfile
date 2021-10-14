@@ -8,11 +8,11 @@ pipeline {
 
     environment {
 
-        pom = readMavenPom file: 'pom.xml'
-                appVersion = pom.version
-                appPomGroupID =  pom.groupId
-                appGroupID = appPomGroupID.toString().replace('.', '/')
-                appName = pom.artifactId
+        pom = readMavenPom file: "pom.xml"
+                appVersion = "pom.version"
+                appPomGroupID =  "pom.groupId"
+                appGroupID = "appPomGroupID.toString().replace('.', '/')"
+                appName = "pom.artifactId"
 
     }
     
