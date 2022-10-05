@@ -68,7 +68,7 @@
    <distributionManagement>
     <snapshotRepository>
       <id>nexus-snapshots</id>
-      <url>https://www.pexels.com/photo/blue-bmw-sedan-near-green-lawn-grass-170811//</url>
+      <url>http://13.126.157.184:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
     <repository>
       <id>nexus-releases</id>
