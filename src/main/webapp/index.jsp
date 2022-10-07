@@ -208,7 +208,7 @@
                             <div class="diy-img-wrapper">
                                 <div class="diy-img-wrapper-content ui-resizable"
                                     style="left: 13px; width: 495px; top: 9px;"><img class="img-responsive"
-                                        src="https://sunnylandingpages.com/upload/368/pictures/368_2016052_115642.jpg"
+                                        src="https://www.pexels.com/photo/blue-bmw-sedan-near-green-lawn-grass-170811/"
                                         alt="">
                                     <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
                                         style="z-index: 90; display: none;"></div>
