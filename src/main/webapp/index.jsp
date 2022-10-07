@@ -208,7 +208,7 @@
                             <div class="diy-img-wrapper">
                                 <div class="diy-img-wrapper-content ui-resizable"
                                     style="left: 13px; width: 495px; top: 9px;"><img class="img-responsive"
-                                        src="https://www.pexels.com/photo/blue-bmw-sedan-near-green-lawn-grass-170811/"
+                                        src="C:\Users\hp\Desktop\car images"
                                         alt="">
                                     <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
                                         style="z-index: 90; display: none;"></div>
