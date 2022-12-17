@@ -6,15 +6,15 @@ pipeline {
 
     // global env variables
 
-    environment {
+//     environment {
 
-        pom = readMavenPom file: "pom.xml"
-                appVersion = "pom.version"
-                appPomGroupID =  "pom.groupId"
-                appGroupID = "appPomGroupID.toString().replace('.', '/')"
-                appName = "readMavenPom().getArtifactId()"
+//         pom = readMavenPom file: "pom.xml"
+//                 appVersion = "pom.version"
+//                 appPomGroupID =  "pom.groupId"
+//                 appGroupID = "appPomGroupID.toString().replace('.', '/')"
+//                 appName = "readMavenPom().getArtifactId()"
 
-    }
+//     }
     
     stages {
      
@@ -110,13 +110,13 @@ pipeline {
 
         }
 
-       stage('Upload to Nexus') {
-            steps {
+//        stage('Upload to Nexus') {
+//             steps {
                 
-               nexusPublisher nexusInstanceId: 'nexus-dev', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/SimpleWebApplication.war']], mavenCoordinate: [artifactId: "${appname}", groupId: "${appPomGroupID}", packaging: 'war', version: "${appVersion}-${BUILD_NUMBER}"]]]
-            }
-        }
-    }
+//                nexusPublisher nexusInstanceId: 'nexus-dev', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/SimpleWebApplication.war']], mavenCoordinate: [artifactId: "${appname}", groupId: "${appPomGroupID}", packaging: 'war', version: "${appVersion}-${BUILD_NUMBER}"]]]
+//             }
+//         }
+//     }
         /*post('Send Email') {
         failure {
             script {
