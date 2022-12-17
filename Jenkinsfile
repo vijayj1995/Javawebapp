@@ -2,7 +2,7 @@ pipeline {
 
     // run on jenkins nodes tha has slave label .....
 
-    agent { label: Maven }
+    agent any
 
     // global env variables
 
