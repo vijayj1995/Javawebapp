@@ -9,6 +9,13 @@ pipeline {
                 echo '<------------- Build completed --------------->'
 				}
 			}
+	 stage('Sonar scan') {
+	     steps {
+	         withSonarQubeEnv(credentialsId: 'sonar_id') {
+			 sh 'sonar-scanner'
+}
+	     }
+	 }
         }
     }
 
