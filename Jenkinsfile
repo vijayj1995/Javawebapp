@@ -11,7 +11,7 @@ pipeline {
 			}
 	 stage('Sonar scan') {
 	     steps {
-	         withSonarQubeEnv(credentialsId: 'sonar_id') {
+	         withSonarQubeEnv('SonarCloud') {
 			 sh 'sonar-scanner'
 }
 	     }
