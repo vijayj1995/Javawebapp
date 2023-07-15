@@ -2,10 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
-            }
+                echo '<--------------- Building --------------->'
+                sh 'mvn clean deploy -Dmaven.test.skip=true'
+                echo '<------------- Build completed --------------->'
+				}
+			}
         }
     }
-}
+
